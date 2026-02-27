@@ -1,1 +1,7 @@
-get-service | where-object { $_.status -eq 'running'} | select-object name , DisplayName
+$x = 0
+
+do{
+    Write-output $x
+    $x++
+}while($x -le 5) {
+}
