@@ -1,7 +1,6 @@
-$x = 0
+$number = 20
 
 do{
-    Write-output $x
-    $x++
-}while($x -le 5) {
-}
+    $number 
+    $number++
+}while($number  -lt 30)
