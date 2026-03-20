@@ -1,11 +1,13 @@
-$path = 'c:\windows\temp'
+$logFile = "$(pwd)\test.txt"
 
-$temporaryFiles = ls $path  | select-object lastwritetime, Name
-$
+if(!(Test-Path($logFile))){
+    New-Item ItemType File -Name 'test.txt'
+}
 
-foreach($file in $temporaryFiles){
-    $period = ((get-date) - $file.lastwritetime).days
-        if($period -ge 7){
-            "$period Days   $($file.name)"
-        }
+while($true){
+    $cpu = (get-counter '\processor(_total)\% processor time').CounterSamples.CookedValue
+    $CpuRounded = "$(Get-Date)  Cpu Usuage: $([math]::Round($cpu, 2)) %"
+
+    $CpuRounded | Out-File $logFile -append
+    start-sleep -seconds 5
 }
